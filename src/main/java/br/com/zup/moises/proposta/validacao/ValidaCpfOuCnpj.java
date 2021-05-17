@@ -1,4 +1,4 @@
-package br.com.zup.moises.proposta.Controller;
+package br.com.zup.moises.proposta.validacao;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.br.CPF;
 @Constraint(validatedBy = { })
 @CPF @CNPJ
 public @interface ValidaCpfOuCnpj {
-	String message() default "{br.com.zup.moises.proposta.Controller.CpfOrCnpj.message}";
+	String message() default "{br.com.zup.moises.proposta.Controller.ValidaCpfOuCnpj.message}";
 	
 	Class<?>[] groups() default{};
 	

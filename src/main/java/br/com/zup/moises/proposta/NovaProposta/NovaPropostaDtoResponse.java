@@ -1,8 +1,6 @@
-package br.com.zup.moises.proposta.Controller.Dto;
+package br.com.zup.moises.proposta.NovaProposta;
 
 import java.math.BigDecimal;
-
-import br.com.zup.moises.proposta.modelo.NovaProposta;
 
 public class NovaPropostaDtoResponse {
 

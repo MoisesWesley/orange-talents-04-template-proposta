@@ -1,20 +1,16 @@
-package br.com.zup.moises.proposta.Controller;
+package br.com.zup.moises.proposta.NovaProposta;
 
 import java.net.URI;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import br.com.zup.moises.proposta.Controller.Dto.NovaPropostaDtoRequest;
-import br.com.zup.moises.proposta.Controller.Dto.NovaPropostaDtoResponse;
-import br.com.zup.moises.proposta.modelo.NovaProposta;
-import br.com.zup.moises.proposta.repository.NovaPropostaRepository;
 
 @RestController
 @RequestMapping("/proposta")
@@ -29,10 +25,16 @@ public class PropostaController {
 	}
 	@PostMapping
 	public ResponseEntity<NovaPropostaDtoResponse> cadastrar(@RequestBody @Valid NovaPropostaDtoRequest novaPropostaDtoRequest, UriComponentsBuilder uriComponentsBuilder) {
-		NovaProposta novaProposta = novaPropostaDtoRequest.toModelConverter();
-		novaPropostaRepository.save(novaProposta);
 
-		URI uriNovaProposta = uriComponentsBuilder.path("/proposta/{id}").build(novaProposta.getId());
-        return ResponseEntity.created(uriNovaProposta).body(new NovaPropostaDtoResponse(novaProposta));
+		if(novaPropostaRepository.existsByDocumento(novaPropostaDtoRequest.getDocumento())) {
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+		} 
+		else {
+			NovaProposta novaProposta = novaPropostaDtoRequest.toModelConverter();
+			novaPropostaRepository.save(novaProposta);
+
+			URI uriNovaProposta = uriComponentsBuilder.path("/proposta/{id}").build(novaProposta.getId());
+	        return ResponseEntity.created(uriNovaProposta).body(new NovaPropostaDtoResponse(novaProposta));
+		}
 	}
 }
