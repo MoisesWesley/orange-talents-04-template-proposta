@@ -4,11 +4,14 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Positive;
-
 import org.hibernate.annotations.GenericGenerator;
+
+import br.com.zup.moises.proposta.AnaliseFinanceira.Status;
 
 @Entity
 public class NovaProposta {
@@ -33,6 +36,9 @@ public class NovaProposta {
 	@Positive
 	@Column(nullable = false)
 	private BigDecimal salario;
+
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
 	public NovaProposta() {
 		// TODO Auto-generated constructor stub
@@ -69,6 +75,11 @@ public class NovaProposta {
 
 	public BigDecimal getSalario() {
 		return salario;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+		
 	}
 
 }
