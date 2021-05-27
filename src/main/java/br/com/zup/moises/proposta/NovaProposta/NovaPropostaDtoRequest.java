@@ -2,7 +2,6 @@ package br.com.zup.moises.proposta.NovaProposta;
 
 import java.math.BigDecimal;
 
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -17,11 +16,11 @@ public class NovaPropostaDtoRequest {
 	private String documento;
 
 	@NotBlank
-	private String email;
-
-	@NotBlank
 	@Length(min = 3)
 	private String nome;
+	
+	@NotBlank
+	private String email;
 
 	@NotBlank
 	private String endereco;
@@ -29,23 +28,20 @@ public class NovaPropostaDtoRequest {
 	@NotNull
 	@Positive
 	private BigDecimal salario;
-	
-	
+
 	@Deprecated
 	public NovaPropostaDtoRequest() {
 	}
-	
-	
-	//passando os valores que vem da requisição sem a mascaca do documento cpf caso tiver
-	public NovaPropostaDtoRequest(String documento, String email, String nome, String endereco, BigDecimal salario) {
+
+	// passando os valores que vem da requisição sem a mascaca do documento cpf caso
+	// tiver
+	public NovaPropostaDtoRequest(String documento, String nome,String email, String endereco, BigDecimal salario) {
 		this.documento = documento.replaceAll("[\\.\\-\\/]", "");
-		this.email = email;
 		this.nome = nome;
+		this.email = email;
 		this.endereco = endereco;
 		this.salario = salario;
 	}
-
-
 
 	public String getDocumento() {
 		return documento;
@@ -69,7 +65,7 @@ public class NovaPropostaDtoRequest {
 
 	public NovaProposta toModelConverter() {
 
-		return new NovaProposta(documento, email, nome, endereco, salario);
+		return new NovaProposta(documento, nome, email, endereco, salario);
 	}
 
 }

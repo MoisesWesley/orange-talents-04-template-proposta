@@ -8,12 +8,16 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Positive;
 import org.hibernate.annotations.GenericGenerator;
 
 import br.com.zup.moises.proposta.AnaliseFinanceira.Status;
+import br.com.zup.moises.proposta.Cartao.Cartao;
 
 @Entity
+@Table(name = "proposta")
 public class NovaProposta {
 
 	@Id
@@ -40,12 +44,14 @@ public class NovaProposta {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
+	@OneToOne
+	private Cartao cartao;
+
 	public NovaProposta() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public NovaProposta(String documento, String nome, String email, String endereco, BigDecimal salario) {
-		super();
 		this.documento = documento;
 		this.nome = nome;
 		this.email = email;
@@ -79,7 +85,17 @@ public class NovaProposta {
 
 	public void setStatus(Status status) {
 		this.status = status;
-		
+
 	}
 
+	public Cartao getCartao() {
+
+		return cartao;
+	}
+
+	// Setter
+
+	public void setCartao(Cartao cartao) {
+		this.cartao = cartao;
+	}
 }

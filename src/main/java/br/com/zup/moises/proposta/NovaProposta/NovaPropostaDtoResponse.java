@@ -15,11 +15,10 @@ public class NovaPropostaDtoResponse {
 	private BigDecimal salario;
 
 	public NovaPropostaDtoResponse(NovaProposta novaProposta) {
-		super();
 		this.id = novaProposta.getId();
 		this.documento = novaProposta.getDocumento();
-		this.email = novaProposta.getEmail();
 		this.nome = novaProposta.getNome();
+		this.email = novaProposta.getEmail();
 		this.salario = novaProposta.getSalario();
 	}
 
