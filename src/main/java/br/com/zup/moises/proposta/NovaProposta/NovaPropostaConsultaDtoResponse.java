@@ -2,35 +2,31 @@ package br.com.zup.moises.proposta.NovaProposta;
 
 import java.math.BigDecimal;
 
-public class NovaPropostaDtoResponse {
+import br.com.zup.moises.proposta.AnaliseFinanceira.Status;
 
-	private String id;
-
-	private String documento;
-
+public class NovaPropostaConsultaDtoResponse {
+	
 	private String email;
-
+	
 	private String nome;
 	
 	private String endereco;
 	
 	private BigDecimal salario;
+	
+	private Status status;
 
-	public NovaPropostaDtoResponse(NovaProposta novaProposta) {
-		this.id = novaProposta.getId();
-		this.documento = novaProposta.getDocumento();
+	@Deprecated
+	public NovaPropostaConsultaDtoResponse() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public NovaPropostaConsultaDtoResponse(NovaProposta novaProposta) {
 		this.email = novaProposta.getEmail();
 		this.nome = novaProposta.getNome();
 		this.endereco = novaProposta.getEndereco();
 		this.salario = novaProposta.getSalario();
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getDocumento() {
-		return documento;
+		this.status = novaProposta.getStatus();
 	}
 
 	public String getEmail() {
@@ -40,13 +36,16 @@ public class NovaPropostaDtoResponse {
 	public String getNome() {
 		return nome;
 	}
-
+	
 	public String getEndereco() {
 		return endereco;
 	}
-	
+
 	public BigDecimal getSalario() {
 		return salario;
 	}
 
+	public Status getStatus() {
+		return status;
+	}
 }

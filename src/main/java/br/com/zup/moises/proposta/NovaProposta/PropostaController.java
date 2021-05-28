@@ -1,12 +1,15 @@
 package br.com.zup.moises.proposta.NovaProposta;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,4 +84,17 @@ public class PropostaController {
 		return ResponseEntity.created(uriNovaProposta).body(new NovaPropostaDtoResponse(novaProposta));
 
 	}
+	
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<NovaPropostaConsultaDtoResponse> consultarProposta(@PathVariable("id") String id) {
+		Optional<NovaProposta> novaProposta = novaPropostaRepository.findById(id);
+		
+		if(novaProposta.isPresent()) {
+			return ResponseEntity.ok(new NovaPropostaConsultaDtoResponse(novaProposta.get()));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+
 }

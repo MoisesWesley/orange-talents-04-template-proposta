@@ -83,9 +83,12 @@ public class NovaProposta {
 		return salario;
 	}
 
+	public Status getStatus() {
+		return status;
+	}
+
 	public void setStatus(Status status) {
 		this.status = status;
-
 	}
 
 	public Cartao getCartao() {
