@@ -17,7 +17,7 @@ import br.com.zup.moises.proposta.AnaliseFinanceira.Status;
 import br.com.zup.moises.proposta.Cartao.Cartao;
 
 @Entity
-//@Table(name = "proposta")
+@Table(name = "proposta")
 public class NovaProposta {
 
 	@Id
